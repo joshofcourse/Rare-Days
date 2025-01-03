@@ -13,9 +13,33 @@ $('.work_item').on('mouseleave', function() {
 });
 
 
+//---------------------------------------------------------------------------------------------------------
+// Desktop Only
 
-$(document).ready(sizzleScroll);
-$(document).ready(heroDiamondScroll);
+$(document).ready(function () {
+  // Define each function call only if screen is above 768px
+  function aboveTablet() {
+      heroDiamondScroll();
+      sizzleScroll();
+  }
+
+  // Set up a media query list for (min-width: 768px)
+  const mediaQuery = window.matchMedia("(min-width: 992px)");
+
+  // Initial check to run functions if already above 768px on page load
+  if (mediaQuery.matches) {
+    aboveTablet();
+  }
+
+  // Listen for changes in viewport width to rerun functions if needed
+  mediaQuery.addEventListener("change", function (event) {
+      if (event.matches) {
+          // The screen width is above 768px
+          aboveTablet();
+      }
+  });
+});
+
 
 
 // #region Newsletter Reveal
